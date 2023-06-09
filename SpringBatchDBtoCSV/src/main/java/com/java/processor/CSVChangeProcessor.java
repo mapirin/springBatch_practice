@@ -2,10 +2,12 @@ package com.java.processor;
 
 import org.springframework.batch.item.ItemProcessor;
 
-public class CSVChangeProcessor implements ItemProcessor<String,String>{
+import com.java.form.Person;
+
+public class CSVChangeProcessor implements ItemProcessor<Person,Person>{
 	
 	@Override
-	public String process(String name) throws Exception{
-		return name;
+	public Person process(Person person) throws Exception{
+		return person;
 	}
 }

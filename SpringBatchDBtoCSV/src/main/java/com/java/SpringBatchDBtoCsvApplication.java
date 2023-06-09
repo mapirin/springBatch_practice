@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class SpringBatchDBtoCsvApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(SpringBatchDBtoCsvApplication.class, args);
+	public static void main(String[] args) throws Exception{
+		System.exit(SpringApplication.exit(SpringApplication.run(SpringBatchDBtoCsvApplication.class, args)));
 	}
 
 }
