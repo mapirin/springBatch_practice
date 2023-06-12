@@ -45,6 +45,9 @@ public class Person {
 		this.country = country;
 	}
 	
-	
+	public String toString() {
+		return "ID"+personID+",firstName"+firstName+",lastName"+lastName
+				+",gender"+gender+",age"+age+",country"+country;
+	}
 	
 }
