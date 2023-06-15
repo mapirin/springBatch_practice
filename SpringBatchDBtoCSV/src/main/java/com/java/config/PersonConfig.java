@@ -2,10 +2,13 @@ package com.java.config;
 
 import org.springframework.batch.item.ExecutionContext;
 import org.springframework.batch.item.file.FlatFileItemReader;
+import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
 import org.springframework.batch.item.file.mapping.DefaultLineMapper;
+import org.springframework.batch.item.file.mapping.FieldSetMapper;
 import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
 import org.springframework.core.io.FileSystemResource;
 
 import com.java.form.Person;
@@ -37,13 +40,39 @@ public class PersonConfig {
 		
 		DefaultLineMapper<Person> lineMapper=new DefaultLineMapper<>();
 		lineMapper.setLineTokenizer(new DelimitedLineTokenizer());
-		lineMapper.setFieldSetMapper(new PersonFieldSetMapper());
+		//Mapperクラスの実装が不要となるBeanWrapperFieldSetMapperを使用
+//		lineMapper.setFieldSetMapper(new PersonFieldSetMapper());
 		
+		
+		lineMapper.setFieldSetMapper(fieldSetMapper());
 		itemReader.setLineMapper(lineMapper);
 		itemReader.open(new ExecutionContext());
 		
 		//TODO
 		//読み取り処理の記述が必要
 		return itemReader;
+	}
+	
+	/**
+	 * Mapperクラスの実装が不要となるBeanWrapperFieldSetMapperを使用するためのメソッド
+	 * @return
+	 */
+	@Bean
+	public FieldSetMapper<Person> fieldSetMapper() {
+		BeanWrapperFieldSetMapper<Person> fieldMapper=new BeanWrapperFieldSetMapper<>();
+		fieldMapper.setPrototypeBeanName("person");
+		fieldMapper.setTargetType(Person.class);
+		
+		return fieldMapper;
+	}
+	
+	/**
+	 * FieldSetMapperのプロトタイプ用メソッド
+	 * @return
+	 */
+	@Bean
+	@Scope("prototype")
+	public Person person() {
+		return new Person();
 	}
 }
