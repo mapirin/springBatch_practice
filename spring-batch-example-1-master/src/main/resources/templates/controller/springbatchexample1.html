@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+	<head>
+	<meta charset="UTF-8">
+	<title>springbatchexample1</title>
+	</head>
+	<body>
+		<form th:action="@{/load}" method="post">
+			<input type="submit" name="start" th:value="start_batch">
+		</form>
+	</body>
+</html>
