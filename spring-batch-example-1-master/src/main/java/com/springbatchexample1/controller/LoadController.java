@@ -32,6 +32,11 @@ public class LoadController {
     	return "controller/springbatchexample1";
     }
     
+    //TODO
+    //バッチ処理完了画面を実装しハンドルさせる
+    //画面からtitle画面に戻れる
+    //process実行間は1秒のブランクを与える
+    //実行途中にjobExecution.getStatus->STARTEDを表示させる
     @RequestMapping("/load")
     @ResponseBody
     public BatchStatus load() throws JobParametersInvalidException, JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException {
